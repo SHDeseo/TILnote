@@ -80,5 +80,71 @@ termcolor:           1.1.0-py36_1          anaconda
 <p>…중간에 condasignalinterrupt 메세지가 뜨고 설치가 중단됐다. 쉩. 선생님 제가 뭘 잘못햇을까요? 밥이나 먹고 오겠습니다.</p>
 <h3 id="교훈"><em>교훈</em></h3>
 <p><strong>conda에 대해 공부하자</strong>. <a href="https://hashcode.co.kr/questions/3873/conda%EC%99%80-pip%EC%9D%98-%EC%B0%A8%EC%9D%B4%EA%B0%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94">천리길도 한걸음부터.</a></p>
-<p>2018.7.30</p>
+<h2 id="아니-문제는--gpu였던-걸까">아니 문제는 -gpu였던 걸까?</h2>
+<blockquote>
+<p>module ‘tensorflow.python.training.checkpointable’ has no attribute<br>
+’CheckpointableBase’</p>
+</blockquote>
+<p>keras도 tensorflow도 불러와지지 않는다.<br>
+뭐가 잘못된걸까 이쯤되면 약간 수치스러움.</p>
+<pre><code>---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-3-64156d691fe5&gt; in &lt;module&gt;()
+----&gt; 1 import tensorflow as tf
+
+C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\__init__.py in &lt;module&gt;()
+     22 
+     23 # pylint: disable=g-bad-import-order
+---&gt; 24 from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
+     25 # pylint: disable=wildcard-import
+     26 from tensorflow.tools.api.generator.api import *  # pylint: disable=redefined-builtin
+
+C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\__init__.py in &lt;module&gt;()
+     61 
+     62 # Framework
+---&gt; 63 from tensorflow.python.framework.framework_lib import *  # pylint: disable=redefined-builtin
+     64 from tensorflow.python.framework.versions import *
+     65 from tensorflow.python.framework import errors
+
+C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\framework_lib.py in &lt;module&gt;()
+    102 from tensorflow.python.framework.random_seed import set_random_seed
+    103 from tensorflow.python.framework.sparse_tensor import convert_to_tensor_or_sparse_tensor
+--&gt; 104 from tensorflow.python.framework.importer import import_graph_def
+    105 
+    106 # Utilities for working with Tensors
+
+C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\importer.py in &lt;module&gt;()
+     30 from tensorflow.python.framework import dtypes
+     31 from tensorflow.python.framework import errors
+---&gt; 32 from tensorflow.python.framework import function
+     33 from tensorflow.python.framework import op_def_registry
+     34 from tensorflow.python.framework import ops
+
+C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\function.py in &lt;module&gt;()
+     34 from tensorflow.python.framework import ops
+     35 from tensorflow.python.ops import array_ops
+---&gt; 36 from tensorflow.python.ops import resource_variable_ops
+     37 from tensorflow.python.ops import variable_scope as vs
+     38 from tensorflow.python.util import compat
+
+C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\ops\resource_variable_ops.py in &lt;module&gt;()
+     33 from tensorflow.python.ops import gen_state_ops
+     34 from tensorflow.python.ops import math_ops
+---&gt; 35 from tensorflow.python.ops import variables
+     36 # go/tf-wildcard-import
+     37 # pylint: disable=wildcard-import
+
+C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\ops\variables.py in &lt;module&gt;()
+     38 
+     39 @tf_export("Variable")
+---&gt; 40 class Variable(checkpointable.CheckpointableBase):
+     41   """See the @{$variables$Variables How To} for a high level overview.
+     42 
+
+AttributeError: module 'tensorflow.python.training.checkpointable' has no attribute 'CheckpointableBase'
+</code></pre>
+<p>keras-gpu와 tensorflow-gpu를 삭제하고 keras와 tensorflow를 설치했다.<br>
+(<a href="https://stackoverflow.com/questions/51390692/attributeerror-module-tensorflow-python-training-checkpointable-has-no-attrib">tensorflow 설치</a> 참고)</p>
+<p>오늘 수업시간에 쓸텐데 계속 에러난다. 아마 박사님께 엄청 깨지더라도 여쭤봐야할듯.</p>
+<p>2018.07.30</p>
 
