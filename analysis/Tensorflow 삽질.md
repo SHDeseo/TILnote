@@ -146,5 +146,15 @@ AttributeError: module 'tensorflow.python.training.checkpointable' has no attrib
 <p>keras-gpu와 tensorflow-gpu를 삭제하고 keras와 tensorflow를 설치했다.<br>
 (<a href="https://stackoverflow.com/questions/51390692/attributeerror-module-tensorflow-python-training-checkpointable-has-no-attrib">tensorflow 설치</a> 참고)</p>
 <p>오늘 수업시간에 쓸텐데 계속 에러난다. 아마 박사님께 엄청 깨지더라도 여쭤봐야할듯.</p>
-<p>2018.07.30</p>
+<h1 id="해결">해결</h1>
+<pre><code>$conda list
+</code></pre>
+<ol>
+<li>설치된 모든 keras, tensorflow 관련 패키지를 지웠다.</li>
+<li><code>conda install keras</code>, <code>conda install tensorflow</code>를 차례로 실행했다.</li>
+<li>주피터 노트북에서 import 성공했다.</li>
+</ol>
+<p>…???<br>
+<code>conda install tensorflow-gpu</code> 를 설치하고나니 keras를 불러올 때 뜨던 “Use tensorflow backend” 라는 경고문도 없다. 이건 뭐… 왜 되는지 알 수 없으니 정상 작동해도 걱정이다. 일단 pip에서 keras와 tnesorflow를 설치한게 일차적인 문제였다는건 알았으니 된건가?</p>
+<p>2018.07.30.</p>
 
